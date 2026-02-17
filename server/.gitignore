@@ -21,4 +21,9 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+*.sw
+
+# Backend sensitive files
+.env
+uploads
+node_modules
