@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../utils/api";
 
 const API_URL =
   import.meta.env.VITE_API_URL || "http://localhost:5000";
@@ -15,7 +15,7 @@ function Faculty() {
   const fetchFaculty = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${API_URL}/api/faculty`);
+      const res = await API.get(`${API_URL}/api/faculty`);
       setFacultyData(res.data);
     } catch (error) {
       console.error("Error fetching faculty:", error);

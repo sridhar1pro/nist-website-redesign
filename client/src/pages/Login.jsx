@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import axios from "axios";
+import API from "../utils/api";
 
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +35,7 @@ function Login() {
 
     try {
 
-      const res = await axios.post(`${API_URL}/api/admin/login`, {
+      const res = await API.post(`${API_URL}/api/admin/login`, {
 
         email,
 

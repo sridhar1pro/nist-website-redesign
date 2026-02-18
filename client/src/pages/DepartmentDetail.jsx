@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../utils/api";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -18,8 +18,8 @@ function DepartmentDetail() {
         setLoading(true);
         
         const [facultyRes, labRes] = await Promise.allSettled([
-          axios.get(`${API_URL}/api/faculty`),
-          axios.get(`${API_URL}/api/labs`)
+          API.get(`${API_URL}/api/faculty`),
+          API.get(`${API_URL}/api/labs`)
         ]);
 
         // Helper function to make department matching "bulletproof"

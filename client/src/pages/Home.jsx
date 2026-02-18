@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../utils/api";
 import { Link } from "react-router-dom";
 
 // High-Prestige Components
@@ -20,7 +20,7 @@ function Home() {
   const fetchNews = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${API_URL}/api/news`);
+      const res = await API.get(`${API_URL}/api/news`);
       // Top 3 news items for the home page
       setNews(res.data.slice(0, 3));
     } catch (error) {

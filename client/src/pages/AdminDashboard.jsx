@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../utils/api";
 
 function AdminDashboard() {
   const token = localStorage.getItem("token");
@@ -61,21 +61,21 @@ function AdminDashboard() {
   =============================== */
   const fetchNews = async () => {
     try {
-      const res = await axios.get(NEWS_API);
+      const res = await API.get(NEWS_API);
       setNews(res.data);
     } catch (err) { console.error("Error fetching news", err); }
   };
 
   const fetchFaculty = async () => {
     try {
-      const res = await axios.get(FACULTY_API);
+      const res = await API.get(FACULTY_API);
       setFacultyList(res.data);
     } catch (err) { console.error("Error fetching faculty", err); }
   };
 
   const fetchLabs = async () => {
     try {
-      const res = await axios.get(LAB_API);
+      const res = await API.get(LAB_API);
       setLabs(res.data);
     } catch (err) { console.error("Error fetching labs", err); }
   };
@@ -100,9 +100,9 @@ function AdminDashboard() {
     };
 
     if (editingId) {
-      await axios.put(`${NEWS_API}/${editingId}`, formData, config);
+      await API.put(`${NEWS_API}/${editingId}`, formData, config);
     } else {
-      await axios.post(NEWS_API, formData, config);
+      await API.post(NEWS_API, formData, config);
     }
 
     resetNewsForm();
@@ -112,7 +112,7 @@ function AdminDashboard() {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this news?")) return;
-    await axios.delete(`${NEWS_API}/${id}`, {
+    await API.delete(`${NEWS_API}/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     fetchNews();
@@ -145,9 +145,9 @@ function AdminDashboard() {
     };
 
     if (facultyEditingId) {
-      await axios.put(`${FACULTY_API}/${facultyEditingId}`, formData, config);
+      await API.put(`${FACULTY_API}/${facultyEditingId}`, formData, config);
     } else {
-      await axios.post(FACULTY_API, formData, config);
+      await API.post(FACULTY_API, formData, config);
     }
 
     setFacultyForm({ name: "", department: "", designation: "", research: "", image: null });
@@ -169,7 +169,7 @@ function AdminDashboard() {
 
   const deleteFaculty = async (id) => {
     if (!window.confirm("Delete this faculty?")) return;
-    await axios.delete(`${FACULTY_API}/${id}`, {
+    await API.delete(`${FACULTY_API}/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     fetchFaculty();
@@ -194,9 +194,9 @@ function AdminDashboard() {
     };
 
     if (labEditingId) {
-      await axios.put(`${LAB_API}/${labEditingId}`, formData, config);
+      await API.put(`${LAB_API}/${labEditingId}`, formData, config);
     } else {
-      await axios.post(LAB_API, formData, config);
+      await API.post(LAB_API, formData, config);
     }
 
     setLabForm({ title: "", department: "", description: "", image: null });
@@ -216,7 +216,7 @@ function AdminDashboard() {
 
   const deleteLab = async (id) => {
     if (!window.confirm("Delete this lab/infrastructure?")) return;
-    await axios.delete(`${LAB_API}/${id}`, {
+    await API.delete(`${LAB_API}/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     fetchLabs();
