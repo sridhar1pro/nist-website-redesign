@@ -15,7 +15,16 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://nist-website-redesign-ymmc.vercel.app"
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // Static Folder for File Uploads
